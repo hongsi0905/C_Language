@@ -40,6 +40,4 @@ void main()
 	const int value = 8;
 	printf("value의 값 : %d", value);
 	// vlaue = 20; value는 컴파일 시점에 값이 고정됨 (8)
-
-
 }
