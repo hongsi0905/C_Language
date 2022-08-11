@@ -23,5 +23,8 @@
     <ClInclude Include="220809 자료형.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="220810 상수.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
