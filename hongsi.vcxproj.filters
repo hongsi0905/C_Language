@@ -13,18 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Class Data">
+      <UniqueIdentifier>{43dc013f-37fc-4b84-aeeb-b632d000a29c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Class data\220811 비트.h">
+      <Filter>Class Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Class data\220809 자료형.h">
+      <Filter>Class Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Class data\220810 상수.h">
+      <Filter>Class Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="220809 자료형.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="220810 상수.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
