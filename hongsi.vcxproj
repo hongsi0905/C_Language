@@ -147,6 +147,7 @@
     <ClInclude Include="Class data\220809 자료형.h" />
     <ClInclude Include="Class data\220810 상수.h" />
     <ClInclude Include="Class data\220811 비트.h" />
+    <ClInclude Include="Class data\220812 연산자.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

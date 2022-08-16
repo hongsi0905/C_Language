@@ -1,104 +1,141 @@
 #include <stdio.h>
 
-
 void main()
 {
+	//논리연산자
 	/*
-		* 실수를 저장하는 방법 (IEEE 754)
-			float : 4byte
-			doulbe : 8byte
-
-		* 고정 소수점
-			- 소수점을 사용하여 고정된 자릿수의 소수를 나타냄
-			[1]  [15] [16]
-			부호 지수 가수
-		
-		* 부동 소수점
-			- 소수점의 위치를 고정하지 않고 그 위치를 나타내는 수를 따로 적는것으로
-			유효 숫자를 나타내는 가수와 소수점의 위치를 풀이하는 지수로 나누어 표현
-		 	 [1]   [8] [23] > 4byte (정밀도 소수점 6자릿수)
-			 [1]  [11] [52] > 8byte (정밀도 소수점 15자릿수)
-			 부호 지수 가수
-
-			 float == float // 4.71 == 4.71 (NO) 비교불가
+		논리연산자
+			- 1 = 참, 0 = 거짓
+			- && (AND) : 두 개의 조건 모두 참이라면 조건 실행
+			- || (OR) : 두 개의 조건에서 하나라도 참이면 조건 실행
 
 
+	int x = 10;
+	int y = 20;
 
-		* 조건문
-			- if : 어떤 특정한 조건을 비교하여 조건이 맞을 시 실행되는 명령문
-					 조건에 정수값 0일 경우 실행하지 않음
-					 if 문의 조건이 참이면 {}부분 실행
-			- else if : if문을 사용하여야만 사용(단독 사용 불가)
-			- else : if와 else if들이 다 거짓이라면 실행되는 조건문 (단독 사용 불가)
-			- 'if'와 여러 개의 'else if'가 있을 경우 가장 먼저 참인 조건문만 실행
-			- 다시 'if'사용 시 새로운 조건문단이다.
+	if (x != 10 && y == 20)
+	{
+		printf("논리연산 AND(&&) 결과 : 참\n");
+		if (5 < 10)
+		{
+			printf("if문 안에 있는 조건문\n");
+		}
+	}
+	if (x == 10 || y == 25)
+	{
+		printf("논리연산 OR(||) 결과 : 참\n");
+	}
 
-			- switch : 어떤 결과에 따라 그 결과부터 실행되는 명령문
-			- go to 
-
-		* 관계 연산자 (0은 거짓, 그 외엔 참)
-			- 2개의 실체 간의 특정한 종류의 관계를 비교하여 원하는 값을 출력 연산자 
-			- [>] [<] [==] [<=] [>=]
 
 	*/
-	///////////////////////////////////////////
-	printf("소수점\n");
-	unsigned char value = 255;
-	printf("unsigned char 값 : %d\n", value);
 
-	// 소수점
-	float pi = 9.25;// 1001.01
-					//   9 = 00001001
-					//0.25 = 0.01
-	/* 
-		첫 번째로 정규화
-			- 소수점을 왼쪽으로 이동시켜 정수부가 한자릿수가 되도록 옮기는 과정
-		 이동시킨 자릿수만큼을 2의 지수로 사용하여 곱함
-		 1001.01 = 1.00101 x 2^3 (이동한 자릿수 : 3)
-		 3(이동한 자릿수) + 127(bais - float) = 130 [1000 0010] 지수부분
-		 [0] [10000010] [00101000000000000000000] = 1.00101 x 2^3
-		 
-		 bais = (float 127), (double 1023)
+	//사분면
+	/*
+		사분면
+		제 1 사분면 : (+x +y)
+		제 2 사분면 : (-x +y)
+		제 3 사분면 : (-x -y)
+		제 4 사분면 : (+x -y)
+		
+		x 절편 : (x y=0)
+		y 절편 : (x=0 y)
+		원점 : (x=0 y=0)
 
+	
 
+	int x ;
+	int y ;
 
-	 */
-	double rotation = 1.25;
-	printf("float pi 값 : %f\n", pi);
-	printf("double rotation 값 : %.15lf\n\n", rotation);
+	printf("x와 y의 값 :");
+	scanf_s("%d %d",&x, &y);
+	
 
-	printf("조건문\n");
-	//조건문
-	if (0)
+	if (x > 0 && y > 0)
 	{
-		printf("첫 번째 조건\n\n");
+		printf("제 1사분면\n");
 	}
-	else if (0) // else if는 if문의 조건이 거짓일 시 조건을 비교하여 실행
+	else if (x < 0 && y > 0)
 	{
-		printf("두 번째 조건\n\n");
+		printf("제 2사분면\n");
 	}
-	else
+	else if (x < 0 && y < 0)
 	{
-		printf("if와 else if 조건이 모두 틀림\n\n");
+		printf("제 3사분면\n");
 	}
-
-	if (1) 
+	else if (x > 0 && y < 0)
 	{
-		printf("새로 시작된 if 조건문단\n\n");
+		printf("제 4사분면\n");
 	}
+	else if (x == 0 && y)
+	{
+		printf("Y절편\n");
+	}
+	else if (x && y == 0)
+	{
+		printf("X절편\n");
+	}
+	else if (x == 0 && y == 0)
+	{
+		printf("원점\n");
+	}
+	*/
 
-	// 관계 연산자
-	int a = 10 > 5;
-	int b = 10 == 10;
-	int c = 10 >= 5;
+	//SWITCH / BREAK
+	/*
+		switch
+			- 어떤 결과에 따라 그 결과부터 실행되는 조건문
+		break
+			- 특정한 시점에서 분기를 종료하는 조건문
+	
 
-	printf("관계 연산자\n");
-	printf("a의 값 : %d\n", a);
-	printf("b의 값 : %d\n", b);
-	printf("c의 값 : %d\n", c);
+	int value = 1;
 
+	switch (value)
+	{
+		case 0: printf("0 입니다");
+			break;
 
+		case 1: printf("1 입니다");
+			break;
 
+		default: printf("잘못 선택");
+	}
+	
+	
+		대학 성적표
+			A 100 - 90
+			B 90 - 80
+			C 80 - 70
+			D 70 - 60
+			E 60 - 50
+			과락
+	
 
+	char alphabet = 'C';
 
+	switch (alphabet)
+	{
+		case 'A':printf("100 - 90점");
+			break;
+		case 'B':printf("90 - 80점");
+			break;
+		case 'C':printf("80 - 70점");
+			break;
+		case 'D':printf("70 - 60점");
+			break;
+		case 'E':printf("60 - 50점");
+			break;
+		default :printf("과락");
+
+	}
+	
+	
+	float variable = 3.25;
+
+	switch (variable)
+	{
+		case 3.25: printf("부동 소수점의 오차로 인해 switch의 조건을 사용할 수 없습니다.");
+			break;
+	}
+	*/
 }

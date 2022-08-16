@@ -27,6 +27,9 @@
     <ClInclude Include="Class data\220810 상수.h">
       <Filter>Class Data</Filter>
     </ClInclude>
+    <ClInclude Include="Class data\220812 연산자.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.c">
