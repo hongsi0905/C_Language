@@ -1,4 +1,5 @@
 #pragma once
+#pragma once
 
 #include <stdio.h>
 
@@ -42,7 +43,7 @@ void main()
 			- 2개의 실체 간의 특정한 종류의 관계를 비교하여 원하는 값을 출력 연산자
 			- [>] [<] [==] [<=] [>=]
 
-	
+
 	///////////////////////////////////////////
 	printf("소수점\n");
 	unsigned char value = 255;
@@ -64,7 +65,7 @@ void main()
 
 
 
- 
+
 	double rotation = 1.25;
 	printf("float pi 값 : %f\n", pi);
 	printf("double rotation 값 : %.15lf\n\n", rotation);

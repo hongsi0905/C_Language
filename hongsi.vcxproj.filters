@@ -36,7 +36,7 @@
     <ClInclude Include="Class data\220817 반복문.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Class data\220812 조건문설명.h">
+    <ClInclude Include="Class data\220812 조건문.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
