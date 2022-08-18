@@ -148,7 +148,9 @@
     <ClInclude Include="Class data\220810 상수.h" />
     <ClInclude Include="Class data\220811 비트.h" />
     <ClInclude Include="Class data\220812 연산자.h" />
+    <ClInclude Include="Class data\220812 조건문설명.h" />
     <ClInclude Include="Class data\220816 스위치.h" />
+    <ClInclude Include="Class data\220817 반복문.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

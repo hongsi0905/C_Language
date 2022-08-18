@@ -33,6 +33,12 @@
     <ClInclude Include="Class data\220816 스위치.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Class data\220817 반복문.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Class data\220812 조건문설명.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.c">
