@@ -151,6 +151,7 @@
     <ClInclude Include="Class data\220812 조건문.h" />
     <ClInclude Include="Class data\220816 스위치.h" />
     <ClInclude Include="Class data\220817 반복문.h" />
+    <ClInclude Include="Class data\220818 형 변환.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

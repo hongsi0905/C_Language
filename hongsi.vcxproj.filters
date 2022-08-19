@@ -39,6 +39,9 @@
     <ClInclude Include="Class data\220812 조건문.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Class data\220818 형 변환.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.c">

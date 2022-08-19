@@ -1,101 +1,81 @@
 #include <stdio.h>
 
+
 void main()
 {
-	//구구단 소스
+
+	//scanf_s 함수 (버전2015 이후부터 버퍼 오버플로에 대한 문제점 때문에 scanf_s 사용을 권장)
 	/*
-	for (int i = 1; i <= 9; i++)
+		scanf("%d", &변수);
+		scanf_s (버전2015 이후부터 버퍼 오버플로에 대한 문제점 때문에 scanf_s 사용을 권장)
+		
+		#pragma warning(disable:4996) : scanf 사용가능
+	
+	int value = 50;
+	scanf_s("%d", &value);
+	printf("value 값 : %d\n", value);
+	
+	*/
+
+	//주소 연산자
+	/*
+		주소 연산자 (변수의 주소 : %p, 변수 & 붙여주기)
+			- 변수의 주소 값을 반환하는 연산자
+			- 변수의 주소는 프로그램이 실행될 때마다 바뀜
+			- 변수의 주소는 16진수 표기
+		
+	
+	int x = 100;
+	printf("x 변수의 주소 : %p", &x);
+	*/
+
+	//포인터
+	/*
+		포인터(*)
+			- 변수의 메모리 주소를 저장하는 변수
+
+		포인터의 크기
+			- 32비트 컴파일러에서는 4 byte
+			- 64비트 컴파일러에서는 8 byte
+	
+	int a = 20;
+	int* ptr = &a; // prt은 포인터 변수로 a의 주소를 저장하고 있으며, ptr 변수는 a의 시작 주소를 가리키고 있다.
+
+	printf("a의 주소 : %d\n", &a);
+	printf("prt이 가르키는 주소 : %p\n", *ptr); //포인터가 가리키는 값을 출력할 때는 &를 사용하지 않아도 된다.
+
+	//역참조 : 
+	*ptr = 100;
+	printf("a의 값 : %d\n", *ptr);
+
+	printf("ptr의 고유 주소 : %p\n", &ptr); // 포인터의 고유 주소를 출력할 때 & 사용
+	printf("포인터 변수의 크기 : %d\n", sizeof(ptr));
+	*/	
+
+	//시프트 연산자
+	/*
+		- 비트의 값을 주어진 숫자만큼 부호 방향으로 이동시키는 연산자
+		- 부호
+			>> : 오른쪽으로 비트를 이동
+			<< : 왼쪽으로 비트를 이동
+	
+
+	char count = 10;
+	printf("왼쪽 1번 시프트 연산 결과 : %d\n", count <<= 1); // << : 변동 없다.  <<= : 변동 있다
+	printf("count 변수의 값 : %d\n", count);
+	printf("오른쪽으로 3번 시프트 연산 결과 : %d\n", count >>= 3);
+	*/
+
+	// ☆ 찍기
+
+	int i,j;
+
+	for (i = 0; i < 5; i++)
 	{
-		printf("%d단\n",i);
-		for (int j = 1; j <= 9; j++)
+		for (j = 0; j <= i; j++)
 		{
-			printf("%d * %d = %d. ", i, j, i * j);
+			printf("☆");
 		}
-		printf("\n\n");
+		printf("\n");
 	}
-	*/
-
-	//while
-	/*
-		특정 조건을 만족할 때까지 계속해서 주어진 명령문을 실행하는 반복문
-
-
-	int memory = 5;
-	while(memory > 1)
-	{
-		memory--;
-		printf("조건이 참입니다.\n");
-	}
-	*/
-
-	//do while
-	/*
-		조건과 상관없이 한 번의 작업을 수행한 다음 조건에 따라 명령문을 실행하는 반복문
-	
-	int x = 5;
-	do
-	{
-		//do에서 선언한 변수는 while의 조건으로 사용할 수 없다.
-		// int y = 10;
-		printf("조건이 거짓입니다.");
-	} while (x==10);
-	*/
-
-	//continue
-	/*
-		해당 조건문만 실행하지 않고, 반복문은 이어서 실행하는 제어문
-	
-
-	//1 ~ 10까지의 수를 출력하는데 3의 배수만 제외하고 출력
-	for (int i = 0; i <=10 ; i++)
-	{
-		if (i % 3 == 0)
-			continue;
-		printf("%d ", i);
-	}
-	*/
-
-	//형 변환
-	/*
-		서로 다른 자료형을 가지고 있는 변수끼리 연산이 이루어질 때
-		기존에 지정했던 자료형을 다른 자료형으로 변환하는 과정
-
-		- 자동 형 변환
-		- 명시적 형 변환 *(float)value
-
-		C언어에서는 정수와 정수를 연산하게 되면 무조건 정수값만 나온다.
-
-		- 암묵적 형 변환
-			서로 다른 자료형으로 연산이 이루어질 때
-			자료형의 크기가 큰 자료형으로 변환되는 과정
-
-
-		- int / long 차이
-			- int는 32비트 운영체제와 64비트 운영체제에서도 4byte 크기
-			- long은 32비트 운영체제에서는 4byte, 64비트 운영체제에서는 8byte 크기
-			  단, Windows 64비트 운영체제에서는 4byte
-	
-	printf("char의 크기 : %d\n", sizeof(char));		 //1
-	printf("short의 크기 : %d\n", sizeof(short));	 //2
-	printf("int의 크기 : %d\n", sizeof(int));		 //4
-	printf("long의 크기 : %d\n", sizeof(long));		 //4
-	printf("float의 크기 : %d\n", sizeof(float));    //4
-	*/
-
-	//암묵적 형 변환
-	char x = 10;
-	short y = 20;
-	int sum = x + y;
-
-	int z = 500;
-	char temp = z;
-
-	printf("temp의 값 : %d\n", temp);
-
-	//명시적 형 변환
-	int p0 = 10;
-	int p1 = 3;
-	float result = (float)p0 / p1; // (float)가 명시적 형 변환문구
-	printf("result 값 : %f", result);
-
 }
