@@ -1,81 +1,78 @@
 #include <stdio.h>
 
-
 void main()
 {
-
-	//scanf_s 함수 (버전2015 이후부터 버퍼 오버플로에 대한 문제점 때문에 scanf_s 사용을 권장)
+	//포인터의 크기
 	/*
-		scanf("%d", &변수);
-		scanf_s (버전2015 이후부터 버퍼 오버플로에 대한 문제점 때문에 scanf_s 사용을 권장)
-		
-		#pragma warning(disable:4996) : scanf 사용가능
-	
-	int value = 50;
-	scanf_s("%d", &value);
-	printf("value 값 : %d\n", value);
-	
+	double value = 9.36;
+	double x = 10.97;
+
+	//포인터 변수를 저장하기 위해 주소 값을 저장할 변수의 자료형과 포인터 변수의 자료형이 일치해야 합니다.
+	double* ptr = &value; // (int -> double )
+	double* ptr1 = &x;
+
+	printf("value 변수의 값 : %lf\n", *ptr);
+	printf("x 변수의 값 : %lf\n", *ptr1);
+	printf("ptr1 변수 크기 : %d\n", sizeof(ptr1));
+
+	ptr = &x;
+	printf("x 변수의 값 : %lf\n", *ptr);
+
+	*ptr = 15.15;
+	printf("x 변수의 값 : %lf\n", *ptr);
+
 	*/
 
-	//주소 연산자
+	//배열
 	/*
-		주소 연산자 (변수의 주소 : %p, 변수 & 붙여주기)
-			- 변수의 주소 값을 반환하는 연산자
-			- 변수의 주소는 프로그램이 실행될 때마다 바뀜
-			- 변수의 주소는 16진수 표기
-		
-	
-	int x = 100;
-	printf("x 변수의 주소 : %p", &x);
-	*/
+		배열
+			- 같은 자료형의 변수들로 이루어진 유한 집합
 
-	//포인터
-	/*
-		포인터(*)
-			- 변수의 메모리 주소를 저장하는 변수
 
-		포인터의 크기
-			- 32비트 컴파일러에서는 4 byte
-			- 64비트 컴파일러에서는 8 byte
-	
-	int a = 20;
-	int* ptr = &a; // prt은 포인터 변수로 a의 주소를 저장하고 있으며, ptr 변수는 a의 시작 주소를 가리키고 있다.
+	int array[5];
+	// 4byte(int) 메모리 공간이 5개의 연속적인 메모리 공간 생성 : 20byte
 
-	printf("a의 주소 : %d\n", &a);
-	printf("prt이 가르키는 주소 : %p\n", *ptr); //포인터가 가리키는 값을 출력할 때는 &를 사용하지 않아도 된다.
+	//배열의 시작 원소는 0이다.
+	//배열의 크기를 벗어나서 저장할 수 없다 (array[5] = 100;)
+	array[0] = 10;
+	array[1] = 20;
+	array[2] = 30;
+	array[3] = 40;
+	array[4] = 50;
 
-	//역참조 : 
-	*ptr = 100;
-	printf("a의 값 : %d\n", *ptr);
 
-	printf("ptr의 고유 주소 : %p\n", &ptr); // 포인터의 고유 주소를 출력할 때 & 사용
-	printf("포인터 변수의 크기 : %d\n", sizeof(ptr));
-	*/	
-
-	//시프트 연산자
-	/*
-		- 비트의 값을 주어진 숫자만큼 부호 방향으로 이동시키는 연산자
-		- 부호
-			>> : 오른쪽으로 비트를 이동
-			<< : 왼쪽으로 비트를 이동
-	
-
-	char count = 10;
-	printf("왼쪽 1번 시프트 연산 결과 : %d\n", count <<= 1); // << : 변동 없다.  <<= : 변동 있다
-	printf("count 변수의 값 : %d\n", count);
-	printf("오른쪽으로 3번 시프트 연산 결과 : %d\n", count >>= 3);
-	*/
-
-	// ☆ 찍기
-
-	int i,j;
-
-	for (i = 0; i < 5; i++)
+	for (int i = 0; i < 5; i++)
 	{
-		for (j = 0; j <= i; j++)
-		{
-			printf("☆");
-		}
-		printf("\n");
+		printf("array %d번째의 값 : %d\n", i+1, array[i]);
 	}
+	printf("array 크기 : %d byte", sizeof(array));
+	*/
+
+	//배열의 초기화
+	/*
+	* 
+	int room[10] = { 0,5,10 };
+	
+	// for비교문 수정없이 하는법 : 배열 크기 / 배열의 자료형
+	int size = sizeof(room)/sizeof(int);
+
+	for (int i = 0; i < size; i++)
+	{
+		printf("room의 %2d번째 값 : %d\n", i + 1, room[i]);
+	}
+	
+	//배열의 크기를 생략할 수 있고, 목록에 설정된 수에 따라 컴파일러가 자동으로 크기계산
+
+	double team[] = { 5.5, 6.4, 7.2 };
+	int size = sizeof(team) / sizeof(double);
+
+	printf("팀의 배열 크기 : %d\n", sizeof(team));
+
+	for (int i = 0; i < size; i++)
+	{
+		team[i] = 0;
+		printf("team[%d] 의 값 : %lf\n",i,team[i]);
+	}
+	*/
+
 }
