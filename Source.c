@@ -2,100 +2,87 @@
 
 void main()
 {
-    // 포인터 연산
-    /*
-    int array[5] = { 10,15,20,25,30 };
+	//문자열
+	/* 
+		- 연속적인 메모리 공간에 저장된 문자 변수의 집합
 
-    printf("배열의 주소 : %p\n", array);
+		char는 1byte이므로 하나의 문자만 저장할 수 있다.
 
-    // pointer 변수는 array의 시작 주소를 가리킵니다.
-    // &array[0] == array랑 같기 때문에 pointer 변수에 저장할 수 있습니다.
-    int* pointer = array;
+	
+	char alphabet = 'A';
+	char string[6] = { 'A','B','C','D','E' }; // 0 1 2 3 4
 
-    printf("포인터 변수의 값 : %p\n", pointer);
-    printf("포인터 변수가 가리키는 값 : %d\n", pointer);
+	string[0]='T';
+	//문자 배열을 선언할 때 맨 마지막에 NULL만 포함.
+	//문자 배열같은 경우에는 배열의 크기 n + 1로 설정
 
-    // pointer 변수가 가라키는 자료형의 크기만큼 증가합니다.
-    pointer = pointer + 1;  //주소값 증가?
-    printf("포인터 변수의 값 : %p\n", pointer);
-    printf("포인터 변수가 가리키는 값 : %d\n",pointer);
+	printf("string 배열의 값 : %s\n", string);
+	//NULL문자는 문자열의 끝을 알려주는 제어 문자
 
-    // 배열 array[3] 요소의 값을 포인터로 접근해서 100이라는 값으로 변경해주세요.
-    pointer = pointer + 2;
-    * pointer = 100;
+	string[2] = '\0';
+	//문자 배열 중간에 NULL문자가 있으면 NULL문자 이전의 문자열까지만 출력
+	//마지막 한 글자 삭제.
+	printf("string 배열의 값 : %s\n", string);
+	*/
 
-    printf("포인터 변수의 값 : %p\n", pointer);
-    printf("포인터 변수가 가리키는 값 : %d\n", *pointer);
-    */
+	//문자열 초기화 - 초기화란 더미에 값을 씌워주는 것
+	/*
+		코드영역
+		데이터영역 : BSS,Read Only Data Segment,
+		스택
+		힙
 
-    // 최댓값과 최솟값 구하기
-    /*
-    // data라는 배열 안에서 최댓값 : 66
-    // data라는 배열 안에서 최솟값 : 1
-    
-    int max = 0;
-    int min = 100001;
+		"count"
+		[c][o][u][n][t][/0] >> 5char + null = 6byte
 
-    int data[5] = { 10,5,66,1,2 };
+		char *ptr >> 4byte 변수의 메모리를 저장할 수 있는 포인터 변수
+		>>[c][o][u][n][t][/0]
+	
+	
+	const char *ptr = "Count\n";
 
-    for (int i = 0; i < 5; i++)
-    {
-        printf("data 배열의 값 : %d\n", data[i]);
+	printf("ptr이 가리키는 주소 : %p\n", ptr); // C의 주소.
+	printf("ptr이 가리키는 값 : %c\n", ptr[0]); // 포인터 변수가 어디를 가리키는지 확인위해 위치값 %c로 출력
+	printf("ptr이 가리키는 문자열의 값 : %s\n", ptr); // %s 문자열의 시작주소로 접근해 string으로 "count"를 출력
 
-        if (max < data[i])
-        {
-            max = data[i];
-        }
-        if (min > data[i])
-        {
-            min = data[i];
-        }
-    }
+	*/
 
-    printf("배열에 있는 원소의 최댓값 : %d\n", max);
-    printf("배열에 있는 원소의 최솟값 : %d\n", min);
-    */
+	// 이중 포인터
+	/*
+	int value = 100; // 4byte
+	int* ptr = &value; // value 주소저장
 
-    // 상수 지시 포인터
-    /*
-        상수를 가르키는 포인터이며, 포인터 자체는 상수가 아닙니다
-    
+	int** twoptr = &ptr; // 이중 포인터 변수(twoptr)는 포인터 변수(ptr)의 주소저장
 
-    int value = 100;
-    int x = 300;
-    const int* ptr = &value;
+	printf("value의 시작주소 값 : %p\n",&value);
+	printf("ptr이 가리키는 값 : %p\n", ptr);
+	printf("twoptr이 가리키는 값 : %p\n", twoptr);
+	printf("ptr 변수가 가리키고 있는 변수 값 : %d\n", *ptr);
+	printf("twoptr 변수가 가리키고 있는 변수 값 : %d\n", **twoptr);
+	*/
 
-    // *ptr = 100; //포인터 변수가 가리키는 값을 변경할 수 없습니다. 
-    value = 200;   //상수 지시 포인터는 해당 변수를 가리키는 변수를 상수화하진 않는다.
-    printf("ptr이 가리키는 값 : %d\n", *ptr);
+	// 소수 판별하기
+	/*
+	// 내가 입력한 숫자가 소수인지 아닌지 판별하기
 
-    //상수 지시 포인터의 경우 다른 변수의 주소는 저장할 수 있다.
-    ptr = &x;
-    printf("ptr이 가리키는 값 : %d\n", *ptr);
-    */
+	int number;
+	int count = 0;
 
-    // 2차원 배열
-    // 배열의 요소로 또 다른 배열을 가지는 배열입니다.
+	printf("숫자를 입력해주세요.");
+	scanf_s("%d", &number);
 
-    // 변수[행][열]
-    int team[2][3] =
-    {
-        {0,5,8},
-        // [0][0] [0][1] [0][2]
-        //     0      5       8 
-        {1,6,7}
-        // [1][0] [1][1] [1][2]
-        //     1      6       7
-    };
+	for (int i = 0; i<=number;i++)
+	{
+		if (number%i==0)
+		{
+			count++;
+		}
+		
+	}
+	if (count == 0)
+	{
+		printf("소수 입니다.\n");
+	}
 
-    for (int i = 0; i < 2;i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            printf("%d행 %d열 : %d, ", i + 1, j + 1, team[i][j]);
-
-        }
-        printf("\n");
-    }
-    
+	*/
 }
