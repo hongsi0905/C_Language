@@ -2,108 +2,111 @@
 #include <stdlib.h>
 #include <time.h>
 
-//참조에 의한 호출
-/*
-void Swap(int *x, int *y)
-{ 
-	// 매개 변수는 함수 내부에서만 사용가능한 변수
-	// 매개 변수가 포인터로 선언, 변수 주소를 전달해야한다.
-	// * (애스터리스크) 연산자를 사용하여 메모리에 접근 후 값 출력
-	int temp = *x;
-	*x = *y;
-	*y = temp;
-	//x, y 변수가 가리키는 주소 출력
-	printf("매개변수 x주소 : %p, y주소 : %p\n", x, y);
-}
-
-void main()
+//재귀 함수
+int Function(int count)
 {
-	//참조에 의한 호출
-	//함수 호출 시 전달되는 변수의 주소를 함수의 인수로 전달하는 방법
-	int x = 10;
-	int y = 20;
-	printf("x : %d, y : %d\n", x, y);
-	Swap(&x, &y); // 주소로 던져줘야 값이 바뀐다. 
-	printf("x : %d, y : %d\n", x, y);
-	//참조에 의한 호출은 매개 변수에 변수의 주소를 넘겨준 다음 외부에 있는 변수의 주소가 참조되어 외부에 있는 변수에 영향을 끼친다.
-	//값에 의한 호출은 매개 변수에 값만 넘겨주므로 외부에 있는 변수의 값이 변경되지 않는다.
-
-}
-*/
-
-//동적할당
-/*
-void main()
-{
-	
-	
-		동적 할당
-		- 프로그램 실행 중에 사용자가 필요한 만큼 메모리를 할당하는 작업
-		메모리
-		- 코드 영역
-		- 데이터 영역
-		- 힙 영역 >> 동적 할당
-		- 스택 영역
-	
-	//[스택] ptr >> [힙] malloc
-	int* ptr = (int*)malloc(sizeof(int));
-	//메모리를 동적 할당할 때 주소를 범용 포인터로 반환하기 때문에 자료형을 변환한 다음 메모리에 할당해야한다.
-
-	*ptr = 10;
-	printf("ptr이 가리키는 주소 : %p\n", ptr);
-	printf("ptr이 가리키는 값 : %d\n", *ptr);
-	
-	// 동적 할당한 메모리는 free함수를 통해 해제한다.
-	// 동적 할당한 메모리를 해제하지 않고 방치하게 되면 메모리 누수 발생
-	free(ptr); 
-	
-}*/
-
-void main()
-{
-	//업다운 게임
-	int number = 0;
-
-	//rand() 컴퓨터는 완벽한 랜덤을 만들 수 없다.
-	//시간을 가져와서 197/01/01 기준으로 시간을 가져와서 랜덤생성
-	//1 ~ 10 사이 난수값 설정
-	// % 연산자 사용
-	srand(time(NULL));
-
-	int answer = rand() % 10 + 1;
-	int HP = 0;
-	printf("시작 체력 설정 : ");
-	scanf_s("%d", &HP);
-	printf("START HP : %d\n", HP);
-	
-
-	for (HP;HP > 0;HP--)
+	if (count == 1) // 매개변수의 값이 1이 되면 함수반환
 	{
+		return;
+	}
+	Function(count-1); // 재귀 호출 (-1씩)
+	printf("count 변수의 값 : %d\n",count);
 
-		printf("\n값을 입력해주세요 : ");
-		scanf_s("%d", &number);
+}
+int factorial(int x)
+{
+
+	if (x == 1)
+	{
+		return 1;
+	}
+	else
+	{
+		return x * factorial(x - 1);
+	}
+}
+
+void main()
+{
+	// UPDOWN게임 (선생님 코드)
+	/*
+		1. 컴퓨터가 랜덤한 숫자 부여
+		2. 스캔함수로 추측 값을 입력
+		3. 랜덤숫자와 추측 값 비교
+	
+	
+
+	int answer = 0;
+	int life = 5;
+	srand(time(NULL));
+	int com = rand() % 50 + 1;
+	
+	
 
 
-		if (answer > number)
+	while (life != 0)
+	{
+		printf("HP : %d\n", life);
+		printf("값 입력 : ");
+		scanf_s("%d", &answer);
+		
+
+		if (answer == com)
 		{
-			printf("UP\n");
-		}
-		else if (answer < number)
-		{
-			printf("DOWN\n");
-		}
-		else
-		{
-			printf("YOU WIN\n");
+			printf("WIN");
 			break;
 		}
-		
-		printf("YOU HP : %d\n", HP-1);
+
+		if (answer < com)
+		{
+			life--;
+			printf("UP\n");
+		}
+		else if (answer > com)
+		{	
+			life--;
+			printf("DOWN\n");
+		}
+
+		if (life == 0)
+		{
+			printf("LOSE");
+		}
 	}
-	if (HP == 0)
-	{
-		printf("==========================\n");
-		printf("YOU LOSE\n");
-		printf("ANSWER : %d\n", answer);
-	}
+	*/
+
+	// 삼항 연산자
+	/*
+		3개의 피연산자를 가지는 조건 연산자
+	
+	int x = 10;
+	int y = 20;
+	
+	// 조건 ? 참 : 거짓
+	int temp = x == y ? 100 : 200;
+	printf("temp 변수의 값 : %d\n", temp);
+	*/
+
+
+	// 재귀 함수
+	/*
+		어떤 함수에서 자신을 다시 호출하여 작업을 수행하는 함수
+		재귀 함수는 함수를 계속 호출하기 때문에
+		스택 영역에 메모리가 계속 쌓이게 되므로 스택 오버플로우가 걸린다
+
+		사용 할 때 특정한 시점에서 함수를 반환해주어야한다.
+
+	Function(3);
+	*/
+
+	// 팩토리얼
+	/*
+		함수를 생성해서 매개 변수에 N값을 넣어 N의 팩토리얼을 구해주세요.
+	*/
+
+	int i = 0;
+	scanf_s("%d", &i);
+
+	int result = factorial(i);
+	printf("%d\n", result);
 }
