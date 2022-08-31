@@ -1,112 +1,69 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
-//재귀 함수
-int Function(int count)
+void Function()
 {
-	if (count == 1) // 매개변수의 값이 1이 되면 함수반환
-	{
-		return;
-	}
-	Function(count-1); // 재귀 호출 (-1씩)
-	printf("count 변수의 값 : %d\n",count);
-
-}
-int factorial(int x)
-{
-
-	if (x == 1)
-	{
-		return 1;
-	}
-	else
-	{
-		return x * factorial(x - 1);
-	}
+	printf("HELLO\n");
 }
 
 void main()
 {
-	// UPDOWN게임 (선생님 코드)
+	// 이중 포인터 응용
 	/*
-		1. 컴퓨터가 랜덤한 숫자 부여
-		2. 스캔함수로 추측 값을 입력
-		3. 랜덤숫자와 추측 값 비교
-	
-	
+	int a = 10;
+	int b = 20;
 
-	int answer = 0;
-	int life = 5;
-	srand(time(NULL));
-	int com = rand() % 50 + 1;
-	
-	
+	int* ptr1 = &a;
+	int* ptr2 = &b;
+
+	int** pptr1 = &ptr1;
+	int** pptr2 = &ptr2;
+
+	printf("pptr1 값 : %d\n", **pptr1);
 
 
-	while (life != 0)
-	{
-		printf("HP : %d\n", life);
-		printf("값 입력 : ");
-		scanf_s("%d", &answer);
-		
 
-		if (answer == com)
-		{
-			printf("WIN");
-			break;
-		}
+	int *temp = *pptr1;
+	*pptr1 = *pptr2;
+	*pptr2 = temp;
 
-		if (answer < com)
-		{
-			life--;
-			printf("UP\n");
-		}
-		else if (answer > com)
-		{	
-			life--;
-			printf("DOWN\n");
-		}
-
-		if (life == 0)
-		{
-			printf("LOSE");
-		}
-	}
+	printf("a 값 : %d // b 값 : %d\n", a, b);
+	printf("ptr1이 가리키는 값 : %d // ptr2가 가리키는 값 : %d", *ptr1, *ptr2);
 	*/
 
-	// 삼항 연산자
+	// 댕글링 포인터
 	/*
-		3개의 피연산자를 가지는 조건 연산자
-	
-	int x = 10;
-	int y = 20;
-	
-	// 조건 ? 참 : 거짓
-	int temp = x == y ? 100 : 200;
-	printf("temp 변수의 값 : %d\n", temp);
+		이미 해제된 메모리를 가리키고 있는 포인터
+
+	int* ptr = (int*)malloc(sizeof(int)); //힙 영역에서 변수명 없다
+	*ptr = 10; // 주소로 접근해서 입력
+	printf("ptr이 가리키는 주소 : %p\n", ptr);
+	printf("ptr이 가리키는 값 : %d\n", *ptr);
+
+	free(ptr);
+	ptr = NULL; //동적 할당한 메모리르 해제할 때 포인터 변수를 NULL로 초기화합니다.
+
+	ptr = (int*)malloc(sizeof(int)); //해제한 메모리를 다시 할당하면 처음 주소에 값을 덮는다
+
+	*ptr = 20;
+	printf("ptr이 가리키는 주소 : %p\n", ptr);
+	printf("ptr이 가리키는 값 : %d\n", *ptr);
 	*/
 
-
-	// 재귀 함수
+	// 함수 포인터
 	/*
-		어떤 함수에서 자신을 다시 호출하여 작업을 수행하는 함수
-		재귀 함수는 함수를 계속 호출하기 때문에
-		스택 영역에 메모리가 계속 쌓이게 되므로 스택 오버플로우가 걸린다
+		함수의 주소값을 저장하고 가리킬 수 있는 변수
 
-		사용 할 때 특정한 시점에서 함수를 반환해주어야한다.
-
-	Function(3);
+		함수의 반환형과 매개변수의 타입이 일치해야하며
+		함수 포인털르 사용하여 동적으로 메모리를 할당할 수 없습니다.
 	*/
 
-	// 팩토리얼
-	/*
-		함수를 생성해서 매개 변수에 N값을 넣어 N의 팩토리얼을 구해주세요.
-	*/
+	//printf("함수 Function 주소 : %p\n", Function);
+	//printf("함수 Function 주소 : %p\n", &Function);
 
-	int i = 0;
-	scanf_s("%d", &i);
 
-	int result = factorial(i);
-	printf("%d\n", result);
+	void (*fp)(int);
+	fp = Function;
+	fp(5);
+
 }
