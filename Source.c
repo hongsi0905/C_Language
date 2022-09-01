@@ -1,69 +1,112 @@
 #include <stdio.h>
-#include <stdlib.h>
-
-void Function()
-{
-	printf("HELLO\n");
-}
 
 void main()
 {
-	// 이중 포인터 응용
+	// 포인터 배열
 	/*
-	int a = 10;
-	int b = 20;
+		배열의 요소로 포인터 변수를 가지는 배열
+	
 
-	int* ptr1 = &a;
-	int* ptr2 = &b;
+	int num1 = 10, num2 = 20, num3 = 30;
 
-	int** pptr1 = &ptr1;
-	int** pptr2 = &ptr2;
+	int* array[] = { &num1, &num2, &num3 };
 
-	printf("pptr1 값 : %d\n", **pptr1);
-
-
-
-	int *temp = *pptr1;
-	*pptr1 = *pptr2;
-	*pptr2 = temp;
-
-	printf("a 값 : %d // b 값 : %d\n", a, b);
-	printf("ptr1이 가리키는 값 : %d // ptr2가 가리키는 값 : %d", *ptr1, *ptr2);
+	for (int i = 0;i < 3;i++)
+	{
+		printf("array 포인터의 값 : %p\n", array[i]); 
+		printf("arry 포인터가 가리키는 값 : %d\n", *array[i]);
+	}
 	*/
 
-	// 댕글링 포인터
+	// 포인터 문자열
 	/*
-		이미 해제된 메모리를 가리키고 있는 포인터
+	 const char* data[3] = { "Apple","Banana","Melon" }; //시작주소만 알면 %s로 문자 출력
+	
+	 data[0] = "Cherry"; // 기존의 문자열에 덮어씌우는 게 아닌 참조 위치를 바꿈
 
-	int* ptr = (int*)malloc(sizeof(int)); //힙 영역에서 변수명 없다
-	*ptr = 10; // 주소로 접근해서 입력
-	printf("ptr이 가리키는 주소 : %p\n", ptr);
-	printf("ptr이 가리키는 값 : %d\n", *ptr);
+	 for (int i = 0;i < 3;i++)
+	 {
+		 printf("%s\n", data[i]); // %s : '\0'(NULL) 문자를 만날 때까지 출력하는 서식 지정자
+	 }
+	 */
 
-	free(ptr);
-	ptr = NULL; //동적 할당한 메모리르 해제할 때 포인터 변수를 NULL로 초기화합니다.
+	// ASCII 코드
+	/*
+		미국 표준화 협회가 제정한 정보 교환용 표준코드
+		영문 알파벳을 사용하는 대표적인 문자 인코딩
+	
 
-	ptr = (int*)malloc(sizeof(int)); //해제한 메모리를 다시 할당하면 처음 주소에 값을 덮는다
-
-	*ptr = 20;
-	printf("ptr이 가리키는 주소 : %p\n", ptr);
-	printf("ptr이 가리키는 값 : %d\n", *ptr);
+	if ('A' < 'B')
+	{
+		for (int i = 0;i < 26;i++)
+		{
+			char alphabet = 'A' + i;
+			printf("%c ", alphabet);
+		}
+	}
 	*/
 
-	// 함수 포인터
+	// 공약수
 	/*
-		함수의 주소값을 저장하고 가리킬 수 있는 변수
+		두 개의 변수(int)를 입력
+		A와 B 변수의 공통된 약수를 출력
+	
+	int A = 0, B = 0;
+	printf("변수를 입력해주세요 : ");
+	scanf_s("%d %d", &A, &B);
 
-		함수의 반환형과 매개변수의 타입이 일치해야하며
-		함수 포인털르 사용하여 동적으로 메모리를 할당할 수 없습니다.
+	printf("A의 약수 : ");
+	for (int i = 1;i <= A;i++)
+	{
+		if (A % i == 0)
+		{
+			printf("%d ", i);
+		}
+	}
+
+	printf("\nB의 약수 : ");
+	for (int i = 1;i <= B;i++)
+	{
+		if (B % i == 0)
+		{
+			printf("%d ", i);
+		}
+	}
+	printf("\nA와 B의 공약수 : ");
+	
+	for (int i = 1;i <= A && i <= B;i++)
+	{
+		if (A % i == 0 && B % i == 0)
+		{
+			printf("%d ", i);
+		}
+	}
 	*/
 
-	//printf("함수 Function 주소 : %p\n", Function);
-	//printf("함수 Function 주소 : %p\n", &Function);
+	// 완전수
+	/*
+		자기 자신을 제외한 양의 약수(진약수)를 더했을 때 자기 자신이 되는 양의 정수를 말한다.
+		또는 모든 양의 약수를 더했을 때 자기 자신의 2배가 되는 수라고도 한다. 6, 28 ,496...
+	*/
+
+	int a;
+	int sum = 0;
+
+	printf("완전수를 입력하세요(값이 나오지 않으면 완전수가 아닙니다.) : ");
+	scanf_s("%d", &a);
+
+	for (int i = 1;i <= a;i++)
+	{
+		if (a % i == 0)
+		{
+			sum += i;
+			if (sum == a)
+			{
+				printf("%d 은/는 완전수 입니다.", sum);
+			}
+		}
+	}
 
 
-	void (*fp)(int);
-	fp = Function;
-	fp(5);
 
 }
