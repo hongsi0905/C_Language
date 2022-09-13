@@ -1,112 +1,77 @@
 #include <stdio.h>
-#include <math.h>
+#include <conio.h>
+#include <windows.h>
 
-struct Player
+// 가변인수
+/*
+	인수의 개수와 타입이 미리 정해져있지 않은 인수
+
+	가변 인수를 만들기 위해서 자료형을 선언해주어야 한다.
+	연속적인 메모리 공간을 가진다.
+
+
+
+void Function(int x,...)
 {
-	int x, y;
-
-};
-
-struct Monster
-{
-	int x, y;
-
-};
-
-void ParameterArray(int array[])
-{
-	for (int i = 0;i < 5;i++)
+	va_list pointer; // 가변 인수의 목록 포인터
+	__crt_va_start(pointer, x); // 가변 인수 목록 포인터 설정
+	
+	for (int i = 0; i < x;i++)
 	{
-		array[i] = 10;
+		// 가변 인수(x)의 개수만큼 반복설정
+		int value = __crt_va_arg(pointer, int); // int 크기만큼 가변 인수 목록 포인터에서 값을 가져온다.
+		// 포인터는 int 크기만큼 순방향 이동
+		printf("%d\n", value);
 	}
+	__crt_va_end(pointer); // 가변 인수 목록 포인터를 NULL 초기화
 }
+*/
 
-void StructArray(struct Player *x)
+// 좌표 정보 X/Y 받는 함수
+void gotoXY(int x, int y)
 {
+	// x/y 좌표값 설정
+	COORD position = { x,y }; 
+	// 좌표 위치이동함수
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position); 
 
 }
 
 int main()
-{
-	//void main / int main
+{	
+	// 가변인수 
 	/*
-		int main()
-		: 함수가 종료할 때 정수형 값을 리턴하겠다는 의미
+	Function(3, 20, 30, 40); // 펑션함수는 하나의 매개변수를 가지고 있기 때문에 하나의 인수만 전달할 수 있다.
 
-		void main()
-		: 함수가 종료할 때 아무 값도 리턴하지 않겠다는 의미
-
-		운영체제에게 프로그램의 종료 사유를 전달해준다.
-		0을 리턴하게 되면 프로그램이  정상적으로 실행을 마치고 종료하는 것으로 전달
-		0 이외에 값을 리턴하게 되면 비정상적으로 종료되는 것으로 판단
+	printf("%d %d %d %d", 20, 30, 40, 50); // printf 함수는 인수를 계속 가변적으로 받을 수 있다.
 	*/
 
-	//두 점 사이의 거리 (캐릭터와 드래곤 거리)
-	/*
+	// 물체 이동
+	/**/
+	// 좌표 정보 설정
+	int x = 5, y = 5;
+	
+	
+	// 키 입력은 프레임마다 입력
+	while(1)
+	{ 
+		// 키 입력 : 논블로킹/블로킹
+		//블로킹 : 키 입력을 받을 때까지 계속 대기하고 다른 작업이 실행되지 않는다.
+		//논블로킹 : 키 입력을 하지 않아도 다른 작업이 실행될 수 있다.
 
-	struct Player character = { 0,0 };
-	struct Monster dragon = { 3,5 };
+		// 아랫키를 눌렀을 때 실행되는 함수
+		if (GetAsyncKeyState(VK_DOWN))
+		{
+			y++; 
+			Sleep(100); // 0.1s 대기 (1/1000 단위)  
+		}
+		// 좌표(5,5) 설정
+		gotoXY(x, y);
+		// 좌표정보를 받아 테스트 출력
+		printf("♠");
+		// 시스템 cls : 화면 전체 지우는 함수
+		system("cls");
 
-	double a, b;
-	a = dragon.x - character.x;
-	b = dragon.y - character.y;
-	double distance = sqrt(pow(a, 2) + pow(b, 2));
-
-	printf("두 점 사이거리 : %lf\n", distance);
-	*/
-
-	//루트와 제곱
-	/*
-	//루트(sqrt)
-	int value = 16;
-	printf("루트 100 값 : %lf\n", sqrt(value));
-
-	//제곱(pow)
-	//x의 제곱 pow(값, x)
-	int variable = 10;
-	printf("variable 제곱 : %lf\n", pow(variable, 2));
-	*/
-
-	// Lvalue / Rvalue
-	/*
-		Lvalue : 표현식 이후에도 사라지지 않는 값, 이름을 지니고 있는 변수 * 상수를 사용할 수 없다.
-		Rvalue : 표현식 이후에 사라지는 값, 임시 변수
-		Lvalue는 Rvalue로 사용할 수 있다.
-
-	//a,b (Lvalue) / 10,20(Rvalue)
-	int a = 10;
-	int b = 20;
-
-	int result = a + b;
-	printf("result 변수 값 : %d\n", result);
-	*/
-
-	// 전위증감, 후위 증감
-	/*
-		전위 증감은 Lvalue, Rvalue 사용할 수 있다.
-		후위 증감은 Rvalue로만 사용할 수 있다.
-
-
-	int x = 0;
-	int y = 0;
-
-	++x; //전위 증가는 증가된 자기 자신(변수)을 반환
-	y++; //후위 증가는 증가된 복사본을 반환
-	*/
-
-	int room[5] = { 0, }; // ,(콤마) 찍을 경우 전부 0으로 초기화
-	for (int i = 0;i < 5;i++)
-	{
-		printf("[%d]", room[i]);
 	}
-	printf("\n");
-	//room은 배열의 시작 주소이다.
-	ParameterArray(room);
-	for (int i = 0;i < 5;i++)
-	{
-		printf("[%d]", room[i]);
-	}
-
 	return 0;
-
 }
