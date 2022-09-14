@@ -1,77 +1,51 @@
 #include <stdio.h>
-#include <conio.h>
-#include <windows.h>
 
-// 가변인수
+// 열거형(enum)
 /*
-	인수의 개수와 타입이 미리 정해져있지 않은 인수
-
-	가변 인수를 만들기 위해서 자료형을 선언해주어야 한다.
-	연속적인 메모리 공간을 가진다.
-
-
-
-void Function(int x,...)
+	반드시 하나의 값만 가지게 될 변수들을 모아놓은 집합체
+	열거형은 정수값으로 정의할 수 없다.
+ 
+//Day 열거형 생성
+enum State
 {
-	va_list pointer; // 가변 인수의 목록 포인터
-	__crt_va_start(pointer, x); // 가변 인수 목록 포인터 설정
+	/*
+	// 열거형 초기값을 명시하지 않으면 가장 처음에 있는 열거형 멤버 변수는 0이라는 값으로 초기화
+	SunDay, // 첫 번째 열거형 멤버 변수
+	MondDay = 20, // 열거형 값 변경가능, 값 설정이후의 변수또한 값 변경
+	TuesDay,
+	WednesDay
 	
-	for (int i = 0; i < x;i++)
-	{
-		// 가변 인수(x)의 개수만큼 반복설정
-		int value = __crt_va_arg(pointer, int); // int 크기만큼 가변 인수 목록 포인터에서 값을 가져온다.
-		// 포인터는 int 크기만큼 순방향 이동
-		printf("%d\n", value);
-	}
-	__crt_va_end(pointer); // 가변 인수 목록 포인터를 NULL 초기화
-}
+	IDLE,
+	ATTACK,
+	JUMP,
+	DEATH
+};
 */
-
-// 좌표 정보 X/Y 받는 함수
-void gotoXY(int x, int y)
-{
-	// x/y 좌표값 설정
-	COORD position = { x,y }; 
-	// 좌표 위치이동함수
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), position); 
-
-}
 
 int main()
 {	
-	// 가변인수 
+	// 열거형
 	/*
-	Function(3, 20, 30, 40); // 펑션함수는 하나의 매개변수를 가지고 있기 때문에 하나의 인수만 전달할 수 있다.
+	// 열거형 변수 선언
+	enum State state;
+	
+	// 시작은 캐릭터를 대기상태로 지정
+	state = IDLE;
 
-	printf("%d %d %d %d", 20, 30, 40, 50); // printf 함수는 인수를 계속 가변적으로 받을 수 있다.
+	switch (state)
+	{
+	case IDLE: printf("대기 상태");
+		break;
+	case ATTACK: printf("공격");
+		break;
+	case JUMP: printf("점프");
+		break;
+	case DEATH: printf("죽음");
+		break;
+	}
 	*/
 
-	// 물체 이동
-	/**/
-	// 좌표 정보 설정
-	int x = 5, y = 5;
-	
-	
-	// 키 입력은 프레임마다 입력
-	while(1)
-	{ 
-		// 키 입력 : 논블로킹/블로킹
-		//블로킹 : 키 입력을 받을 때까지 계속 대기하고 다른 작업이 실행되지 않는다.
-		//논블로킹 : 키 입력을 하지 않아도 다른 작업이 실행될 수 있다.
 
-		// 아랫키를 눌렀을 때 실행되는 함수
-		if (GetAsyncKeyState(VK_DOWN))
-		{
-			y++; 
-			Sleep(100); // 0.1s 대기 (1/1000 단위)  
-		}
-		// 좌표(5,5) 설정
-		gotoXY(x, y);
-		// 좌표정보를 받아 테스트 출력
-		printf("♠");
-		// 시스템 cls : 화면 전체 지우는 함수
-		system("cls");
 
-	}
 	return 0;
 }
