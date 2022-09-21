@@ -1,3 +1,4 @@
+#pragma once
 //#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
@@ -14,24 +15,24 @@ void Mycat(char* str1, const char* str2)
 {
 	while (*str1 != '\0')
 	{
-		str1++;		
+		str1++;
 	}
 	while (*str2 != '\0')
 	{
 		*str1 = *str2;
 		str1++;
 		str2++;
-		
+
 	}
-	
+
 }
 
 int main()
-{	
+{
 	// 자기 참조 구조체
 	/*
 		자신과 동일한 구조체를 가리킬 수 있는 포인터 변수를 멤버 변수로 가지는 구조체
-	
+
 	// NULL은 포인터가 아무 위치를 가리키지 않도록 설정
 	struct Node node1 = { 10,NULL };
 	struct Node node2 = { 20,NULL };
@@ -43,10 +44,10 @@ int main()
 	structPtr->pointer = &node2;
 	printf("두 번째 구조체 data 값 : %d\n", structPtr->pointer->data);
 
-	//struct->pointer : 
+	//struct->pointer :
 	structPtr->pointer->pointer = &node3;
 	printf("세 번째 구조체 data 값 : %d\n", structPtr->pointer->pointer->data);
-	
+
 
 	// 문자열 함수
 	//strlen( ) : 문자열의 길이를 출력하는 함수 (널 문자 제외)
@@ -61,7 +62,7 @@ int main()
 		// read only 영역에 있는 문자열 리터럴이기에 값을 변경할 수 없다.
 		const char* C = "Caramel";
 		const char* D = "Donut";
-	
+
 	strcpy_s(A, 7, B);
 	printf("strcpy	문자열 A : %s\n", A);
 
@@ -81,7 +82,7 @@ int main()
 	//strcat_s(last, 10, first);
 	Mycat(last, first);
 	printf("내 이름은 : %s\n", last);
-	
+
 
 	return 0;
 }
