@@ -2,7 +2,7 @@
 //#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
-
+/*
 // 자기 참조 구조체
 struct Node
 {
@@ -30,7 +30,7 @@ void Mycat(char* str1, const char* str2)
 int main()
 {
 	// 자기 참조 구조체
-	/*
+	
 		자신과 동일한 구조체를 가리킬 수 있는 포인터 변수를 멤버 변수로 가지는 구조체
 
 	// NULL은 포인터가 아무 위치를 가리키지 않도록 설정
@@ -75,7 +75,7 @@ int main()
 	printf("strcmp	두 개의 문자열을 비교 : %d\n", strcmp(no1, no2));
 	printf("strcmp	두 개의 문자열을 비교 : %d\n", strcmp(no1, no3));
 	printf("strncmp	두 개의 문자열을 비교 : %d\n", strncmp(no1, no2, 5));
-	*/
+	
 	//strcat( ) : 문자열을 연결하는 함수
 	char last[10] = { "LEE" };
 	char first[10] = { "GIHYUN" };
@@ -83,6 +83,6 @@ int main()
 	Mycat(last, first);
 	printf("내 이름은 : %s\n", last);
 
-
+	*/
 	return 0;
 }
