@@ -1,3 +1,5 @@
+#pragma once
+/*
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
@@ -6,7 +8,7 @@
 /*
 	이미 사용되는 자료형을 다른 새로운 자료형으로 재정의할 수 있도록 해주는 키워드
 	typedef구조체를 선언할 때 [_이름] 선언 정의 [이름] 선언
-*/
+
 typedef int INTEL;
 typedef struct _Player
 {
@@ -42,12 +44,12 @@ int main()
 		sum += i;
 	}
 	printf("%d까지의 합 : %d\n",n, sum);
-	*/
+	
 
 	// 문제 : 역순으로 별찍기
 	int i, j, k;
 
-	for (i = 0;i <5 ;i++)
+	for (i = 0;i < 5;i++)
 	{
 		for (j = 5;j > i;j--)
 		{
@@ -59,7 +61,7 @@ int main()
 		}
 		printf("\n");
 	}
-
+	*/
 
 	return 0;
 }
