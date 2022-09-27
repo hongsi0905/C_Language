@@ -2,131 +2,200 @@
 #include <stdio.h>
 #include <conio.h>
 #include <windows.h>
+#define MAPHEIGHT 36
+#define MAPWIDTH 16
 
-// 더블 버퍼링이란
+// 게임 상점 설정 [가로로][세로로]
+
+// 게임 땅 설정 [가로로][세로로] 
 /*
-	싱글 버퍼링으로 화면을 그릴 경우 데이터를 저장하는 동안
-	다음 그림의 데이터를 전송할 수 없기 때문에 지우고 그리며 반복할 경우
-	깜빡임을 막기 위해 화면을 서로 교체하는 기법
+	0 그냥 블록
+	1 철
+	2 은
+	3 금
+	4 다이아
+	5 맨틀
 */
-
-#define BufferWidth 80 // 버퍼 가로길이
-#define BufferHeight 40 // 버퍼 세로길이
-
-// HANDLE 인덱스에 접근하여 버퍼교체변수
-int screenIndex = 0;
-// 버퍼 2개 생성
-HANDLE Screen[2];
-
-struct Player
+char MAPBLOCK[MAPHEIGHT][MAPWIDTH] =
 {
-	int x;
-	int y;
-	const char* shape;
+	{"99"},
+	{"888"},
+	{"888"},
+	{"888"},
+	{"8887777S"},
+	{"500000000000005"},
+	{"500000000000005"},
+	{"500000000000105"},
+	{"500001000000005"},
+	{"500000000000005"},
+	{"500000002000005"},
+	{"500010000000005"},
+	{"500000000000005"},
+	{"500000000002005"},
+	{"500000000000005"},
+	{"500010000000005"},
+	{"500000000000005"},
+	{"500000000300005"},
+	{"500000000000005"},
+	{"500000000000005"},
+	{"500000000000005"},
+	{"500030000000005"},
+	{"500030000003005"},
+	{"500000000000005"},
+	{"500000000000005"},
+	{"500000000000005"},
+	{"500020000000005"},
+	{"500000000030005"},
+	{"500000000000005"},
+	{"500000000000005"},
+	{"500000000000005"},
+	{"504000000040005"},
+	{"500000000000005"},
+	{"500004000000005"},
+	{"500000000000005"},
+	{"555555565555555"}
 };
 
-//구조체 포인터 선언
-Player* player; 
+void init();
 
-// 버퍼 초기화 함수
-void ScreenInit()
-{
-	CONSOLE_CURSOR_INFO cursor;
-	COORD size = { BufferWidth,BufferHeight };
-	SMALL_RECT rect = { 0,0,BufferWidth - 1,BufferHeight - 1 };
-
-	// 화면 2개 생성
-	// Front Buffer
-	Screen[0] = CreateConsoleScreenBuffer
-	(
-		GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
-		NULL, CONSOLE_TEXTMODE_BUFFER, NULL
-	);
-
-	SetConsoleScreenBufferSize(Screen[0], size);
-	SetConsoleWindowInfo(Screen[0], TRUE, &rect);
-
-	// Back Buffer
-	Screen[1] = CreateConsoleScreenBuffer
-	(
-		GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
-		NULL, CONSOLE_TEXTMODE_BUFFER, NULL
-	);
-
-	SetConsoleScreenBufferSize(Screen[1], size);
-	SetConsoleWindowInfo(Screen[1], TRUE, &rect);
-
-	// 커서 숨기기
-	cursor.dwSize = 1;
-	cursor.bVisible = false;
-	SetConsoleCursorInfo(Screen[0], &cursor);
-	SetConsoleCursorInfo(Screen[1], &cursor);
-}
-
-// 버퍼 교체 함수
-void ScreenFlipping()
-{
-	// 버퍼는 하나만 활성화 가능
-	SetConsoleActiveScreenBuffer(Screen[screenIndex]);
-	screenIndex = !screenIndex;
-}
-
-// 버퍼 지우는 함수
-void ScreenClear()
-{
-	COORD coord = { 0,0 };
-	DWORD dw;
-	FillConsoleOutputCharacter
-	(
-		Screen[screenIndex],
-		' ',
-		BufferWidth * BufferHeight,
-		coord,
-		&dw
-	);
-}
-
-// 버퍼 해제 함수
-void ScreenRelease()
-{
-	CloseHandle(Screen[0]);
-	CloseHandle(Screen[1]);
-}
-
-// 출력함수
-void ScreenPrint(int x, int y, const char * string)
-{
-	COORD cursorPosition = { x,y };
-	DWORD dw;
-
-	SetConsoleCursorPosition(Screen[screenIndex], cursorPosition);
-	WriteFile(Screen[screenIndex], string, strlen(string), &dw, NULL);
-}
+void PrintBLOCK(char block[MAPHEIGHT][MAPWIDTH]);
+void gotoXY(int x,int y);
+void textcolor(int);
 
 int main()
 {
-	// 플레이어 생성
-	player = (Player*)malloc(sizeof(Player));
-	player->x = 5;
-	player->y = 5;
-	player->shape = "♠";
+	init();
+	
 
-	ScreenInit(); // 버퍼 초기화
 
-	while (1)
-	{
-		if (GetAsyncKeyState(VK_RIGHT))
-		{
-			player->x++;
-			Sleep(100);
-		}
+	PrintBLOCK(MAPBLOCK);
+	
+	
 
-		ScreenPrint(player->x, player->y, player->shape); 
-
-		ScreenFlipping(); // 버퍼 교체
-		ScreenClear(); // 교체된 버퍼 내용 삭제
-	}
-	ScreenRelease(); // 버퍼해제
 
 	return 0;
+}
+
+
+// 게임 제목과 크기
+void init() 
+{
+	system("mode con cols=60 lines=40 | title 광부");
+}
+
+// 상점 블록화
+void PrintSHOP(char shop[5][3])
+{
+	for (int i = 0; i < 5;i++)
+	{
+		for (int j = 0;j < 3;j++)
+		{
+			if (shop[i][j] == '1')
+				printf("■");
+			else if (shop[i][j] == '0')
+				printf("□");
+		}
+		printf("\n");
+	}
+}
+
+// 필드 블록화 및 색상
+void PrintBLOCK(char block[MAPHEIGHT][MAPWIDTH])
+{
+	for (int i = 0; i < MAPHEIGHT;i++)
+	{
+		for (int j = 0;j < MAPWIDTH;j++)
+		{
+			if (block[i][j] == '0')
+			{
+				textcolor(6);
+				printf("■");
+				printf("\x1b[0m");
+			}// 그냥 블록
+			else if (block[i][j] == '1')
+			{
+				textcolor(8);
+				printf("□");
+				printf("\x1b[0m");
+			}// 철
+			else if (block[i][j] == '2')
+			{
+				textcolor(7);
+				printf("▣");
+				printf("\x1b[0m");
+			}// 은
+			else if (block[i][j] == '3')
+			{
+				textcolor(14);
+				printf("■");
+				printf("\x1b[0m");
+			}// 금
+			else if (block[i][j] == '4')
+			{
+				textcolor(11);
+				printf("◆");
+				printf("\x1b[0m");
+			}// 다이아
+			else if (block[i][j] == '5')
+				printf("▦"); // 맨틀
+			else if (block[i][j] == '6')
+			{
+				textcolor(12);
+				printf("※");
+				printf("\x1b[0m");
+			}// 파괴 시 게임 끝
+			else if (block[i][j] == '7')
+			{
+				printf("　");
+			} // 여백
+			else if (block[i][j] == '8')
+			{
+				printf("□");
+			}// 상점 벽
+			else if (block[i][j] == '9')
+			{
+				printf("■");
+			}// 상점 지붕
+
+			else if (block[i][j] == 'S')
+			{
+				printf("♠");
+			}
+		}
+		printf("\n");
+	}
+}
+
+// 블록 이동
+void gotoXY(int x, int y)
+{
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	COORD position;
+	position.X = x;
+	position.Y = y;
+	SetConsoleCursorPosition(consoleHandle, position);
+} 
+
+// 색상 코드
+enum ColorType {
+	BLACK,  	//0
+	darkBLUE,	//1
+	DarkGreen,	//2
+	darkSkyBlue,//3
+	DarkRed,  	//4
+	DarkPurple,	//5
+	BROWN,	//6
+	GRAY,		//7
+	DarkGray,	//8
+	BLUE,		//9
+	GREEN,		//10
+	SkyBlue,	//11
+	RED,		//12
+	PURPLE,		//13
+	YELLOW,		//14
+	WHITE		//15
+} COLOR;
+void textcolor(int colorNum) 
+{
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorNum);
 }
