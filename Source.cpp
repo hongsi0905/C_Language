@@ -210,7 +210,7 @@ void GLoop()
 	int cnt=20; // 곡괭이 카운트
 	int playing = 1; // while값에 넣을 변수 1 > 게임중
 
-	memcpy(tempMAP, MAPBLOCK, sizeof(tempMAP)); // 맵복사(복사본,원본,크기)
+	memcpy(tempMAP, MAPBLOCK, sizeof(tempMAP)); // 맵복사(복사본,원본,크기).
 
 	PrintBLOCK(&x,&y); // 맵출력
 
